@@ -2,8 +2,12 @@ package controllers
 
 import (
 	"net/http"
-	"github.com/gin-gonic/gin"
+	// "fmt"
 	userService "gin-api/services"
+	"gin-api/models"
+
+	"github.com/gin-gonic/gin"
+	"github.com/jackc/pgx/v4"
 )
 
 
@@ -12,11 +16,16 @@ import (
 // get the service response and handle error if any
 // And finally return the service response
 func UserRegister(c *gin.Context) {
-	result, err := userService.UserRegister()
+	user := models.User{} 
+	err := c.ShouldBindJSON(&user)
 	if err != nil {
-		c.JSON(http.StatusNotFound,gin.H{
-			"status":"not found",
-		})
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
 	}
-	c.JSON(http.StatusOK,result)
+
+	db, _ := c.Get("db")
+	conn := db.(pgx.Conn)
+
+	userService.UserRegister(c, &conn, user)
+	
 }
