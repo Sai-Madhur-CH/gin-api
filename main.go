@@ -51,7 +51,7 @@ func connectDB() (c *pgx.Conn, err error) {
 // This function is used to add the created connection in the Context 
 // so that its avaliable all over the application
 func dbMiddleware(conn pgx.Conn) gin.HandlerFunc {
-	return func(c * gin.Context)  {
+	return func(c *gin.Context)  {
 		c.Set("db", conn)
 		c.Next()
 	}
