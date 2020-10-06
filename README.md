@@ -12,6 +12,6 @@ And there is not Web repo attached to it
 
 Concepts Used :
 
-JWT-Token Auth
-PGX for postgresql db connection
-Bycrypt for hashing the password 
+JWT-Token Auth,
+PGX for postgresql db connection,
+Bycrypt for hashing the password.
