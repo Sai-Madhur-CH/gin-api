@@ -7,7 +7,7 @@ import (
 
 
 // Get the router of type *gin.Engine form the main.go file and initilize all the routers 
-// and point them to the specific controllers
+// And point them to the specific controllers
 func InitializeRoutes(router *gin.Engine) {
 	router.POST("/user",userController.UserRegister	)
 }
